@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAPPER", "DAPPER\DAPPER.csproj", "{413BAC45-A5B1-4CE1-82BD-D39514A314E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GranDT", "GranDT\GranDT.csproj", "{DFF79E5D-5617-4871-A8F6-ED3ACAE20807}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{413BAC45-A5B1-4CE1-82BD-D39514A314E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{413BAC45-A5B1-4CE1-82BD-D39514A314E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{413BAC45-A5B1-4CE1-82BD-D39514A314E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{413BAC45-A5B1-4CE1-82BD-D39514A314E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFF79E5D-5617-4871-A8F6-ED3ACAE20807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFF79E5D-5617-4871-A8F6-ED3ACAE20807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFF79E5D-5617-4871-A8F6-ED3ACAE20807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFF79E5D-5617-4871-A8F6-ED3ACAE20807}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

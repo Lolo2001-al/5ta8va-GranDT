@@ -1,0 +1,236 @@
+DELIMITER $$
+
+CREATE PROCEDURE sp_InsertarFutbolista(
+    IN p_idTipoJugador INT,
+    IN p_idEquipo INT,
+    IN p_Nombre VARCHAR(45),
+    IN p_Apellido VARCHAR(45),
+    IN p_Apodo VARCHAR(45),
+    IN p_FechaNacimiento DATE,
+    IN p_Cotizacion DOUBLE
+)
+BEGIN
+    INSERT INTO Futbolistas (idTipoJugador, idEquipo, Nombre, Apellido, Apodo, FechaNacimiento, Cotizacion)
+    VALUES (p_idTipoJugador, p_idEquipo, p_Nombre, p_Apellido, p_Apodo, p_FechaNacimiento, p_Cotizacion);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_CrearPlantilla(
+    IN p_idUsuario INT,
+    IN p_Presupuesto DOUBLE,
+    IN p_MaxJugadores INT
+)
+BEGIN
+    INSERT INTO Plantillas (idUsuario, Presupuesto, MaxJugadores)
+    VALUES (p_idUsuario, p_Presupuesto, p_MaxJugadores);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_InsertarPuntuacion(
+    IN p_idFutbolista INT,
+    IN p_Nota DECIMAL(4,2),
+    IN p_FechaPartido DATE
+)
+BEGIN
+    INSERT INTO Puntuacion (idFutbolista, Nota, FechaPartido)
+    VALUES (p_idFutbolista, p_Nota, p_FechaPartido);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_AgregarFutbolistaAPlantilla(
+    IN p_idPlantilla INT,
+    IN p_idFutbolista INT,
+    IN p_Titular INT
+)
+BEGIN
+    INSERT INTO PlantillaFutbolista (idPlantilla, idFutbolista, Titular)
+    VALUES (p_idPlantilla, p_idFutbolista, p_Titular);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_VerPlantilla$$
+
+CREATE PROCEDURE sp_VerPlantilla(IN p_idPlantilla INT)
+BEGIN
+  SELECT f.idFutbolista, f.Nombre, f.Apellido, f.Apodo, f.Cotizacion, pf.Titular
+  FROM PlantillaFutbolista pf
+  JOIN Futbolistas f ON pf.idFutbolista = f.idFutbolista
+  WHERE pf.idPlantilla = p_idPlantilla;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_VerPuntuacionesFutbolista(
+    IN p_idFutbolista INT
+)
+BEGIN
+    SELECT p.idPuntuacion, p.Nota, p.FechaPartido
+    FROM Puntuacion p
+    WHERE p.idFutbolista = p_idFutbolista
+    ORDER BY p.FechaPartido DESC;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_VerPuntuacionesUsuario(
+    IN p_idUsuario INT
+)
+BEGIN
+    SELECT f.Nombre, f.Apellido, p.Nota, p.FechaPartido
+    FROM Plantillas pl
+    INNER JOIN PlantillaFutbolista pf ON pl.idPlantilla = pf.idPlantilla
+    INNER JOIN Futbolistas f ON pf.idFutbolista = f.idFutbolista
+    INNER JOIN Puntuacion p ON f.idFutbolista = p.idFutbolista
+    WHERE pl.idUsuario = p_idUsuario
+    ORDER BY p.FechaPartido DESC;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_PromedioPuntuacionFutbolista(
+    IN p_idFutbolista INT
+)
+BEGIN
+    SELECT f.Nombre, f.Apellido, AVG(p.Nota) AS Promedio
+    FROM Futbolistas f
+    INNER JOIN Puntuacion p ON f.idFutbolista = p.idFutbolista
+    WHERE f.idFutbolista = p_idFutbolista
+    GROUP BY f.idFutbolista;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_PuntajeTotalUsuario(
+    IN p_idUsuario INT
+)
+BEGIN
+    SELECT u.Nombre, u.Apellido, SUM(p.Nota) AS PuntajeTotal
+    FROM Usuario u
+    INNER JOIN Plantillas pl ON u.idUsuario = pl.idUsuario
+    INNER JOIN PlantillaFutbolista pf ON pl.idPlantilla = pf.idPlantilla
+    INNER JOIN Puntuacion p ON pf.idFutbolista = p.idFutbolista
+    WHERE u.idUsuario = p_idUsuario
+    GROUP BY u.idUsuario;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS trg_after_insert_usuario$$
+
+CREATE TRIGGER trg_after_insert_usuario
+AFTER INSERT ON Usuario
+FOR EACH ROW
+BEGIN
+    INSERT INTO Plantillas (idUsuario, Presupuesto, MaxJugadores)
+    VALUES (NEW.idUsuario, 100.00, 15);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS trg_after_insert_usuario $$
+
+CREATE TRIGGER trg_after_insert_usuario
+AFTER INSERT ON Usuario
+FOR EACH ROW
+BEGIN
+  INSERT INTO Administracion (idUsuario, idFutbolista, PuntuacionCarga, CrearJugadores)
+  VALUES (NEW.idUsuario, NULL, 0, 'NO');
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS trg_after_insert_Puntuacion $$
+
+CREATE TRIGGER trg_after_insert_puntuacion
+AFTER INSERT ON Puntuacion
+FOR EACH ROW
+BEGIN
+  INSERT INTO Administracion (idUsuario, idFutbolista, PuntuacionCarga, CrearJugadores)
+  VALUES (NULL, NEW.idFutbolista, 1, 'NO');
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS trg_after_insert_plantillafutbolista$$
+
+CREATE TRIGGER trg_after_insert_plantillafutbolista
+AFTER INSERT ON PlantillaFutbolista
+FOR EACH ROW
+BEGIN
+    UPDATE Plantillas pl
+    JOIN Futbolistas f ON NEW.idFutbolista = f.idFutbolista
+    SET pl.Presupuesto = pl.Presupuesto - f.Cotizacion
+    WHERE pl.idPlantilla = NEW.idPlantilla;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS trg_before_insert_plantillafutbolista$$
+
+CREATE TRIGGER trg_before_insert_plantillafutbolista
+BEFORE INSERT ON PlantillaFutbolista
+FOR EACH ROW
+BEGIN
+  DECLARE cantidadJugadores INT DEFAULT 0;
+  DECLARE maxJug INT DEFAULT 0;
+  DECLARE existeJugador INT DEFAULT 0;
+
+  -- ¿ya está ese futbolista en la plantilla?
+  SELECT COUNT(*) INTO existeJugador
+    FROM PlantillaFutbolista
+   WHERE idPlantilla = NEW.idPlantilla
+     AND idFutbolista = NEW.idFutbolista;
+
+  IF existeJugador > 0 THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El jugador ya pertenece a la plantilla';
+  END IF;
+
+  -- cantidad actual de jugadores en la plantilla
+  SELECT COUNT(*) INTO cantidadJugadores
+    FROM PlantillaFutbolista
+   WHERE idPlantilla = NEW.idPlantilla;
+
+  -- obtener MaxJugadores y tratar NULL como 0
+  SELECT COALESCE(MaxJugadores, 0) INTO maxJug
+    FROM Plantillas
+   WHERE idPlantilla = NEW.idPlantilla
+   LIMIT 1;
+
+  IF maxJug <= 0 THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Maximo de Jugadores inválido para la plantilla';
+  ELSEIF cantidadJugadores >= maxJug THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No se puede agregar más jugadores a esta plantilla';
+  END IF;
+END$$
+
+DELIMITER ;

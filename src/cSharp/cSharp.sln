@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GranDT.Test", "GranDT.Test\GranDT.Test.csproj", "{9E7CAB7D-0028-43DF-80B4-4950362F0DDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GranDT.Dapper", "GranDT.Dapper\GranDT.Dapper.csproj", "{5DB90ABE-5987-4DA9-99B4-5DAD825CDBE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GranDT.Core", "GranDT.Core\GranDT.Core.csproj", "{78494E3F-AE49-49BF-B10A-01B523252C63}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E7CAB7D-0028-43DF-80B4-4950362F0DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E7CAB7D-0028-43DF-80B4-4950362F0DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E7CAB7D-0028-43DF-80B4-4950362F0DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E7CAB7D-0028-43DF-80B4-4950362F0DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DB90ABE-5987-4DA9-99B4-5DAD825CDBE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DB90ABE-5987-4DA9-99B4-5DAD825CDBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DB90ABE-5987-4DA9-99B4-5DAD825CDBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DB90ABE-5987-4DA9-99B4-5DAD825CDBE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78494E3F-AE49-49BF-B10A-01B523252C63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78494E3F-AE49-49BF-B10A-01B523252C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78494E3F-AE49-49BF-B10A-01B523252C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78494E3F-AE49-49BF-B10A-01B523252C63}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
