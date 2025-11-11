@@ -52,6 +52,7 @@
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(button3);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form7";
             Text = "GRAN DT";
             ResumeLayout(false);

@@ -188,6 +188,7 @@
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "GRAN DT";
             Load += Form1_Load;

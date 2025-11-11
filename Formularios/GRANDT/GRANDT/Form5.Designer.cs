@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form5));
             button1 = new Button();
+            trackBar1 = new TrackBar();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -44,6 +46,15 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // trackBar1
+            // 
+            trackBar1.BackColor = Color.Black;
+            trackBar1.Location = new Point(170, 140);
+            trackBar1.Name = "trackBar1";
+            trackBar1.RightToLeft = RightToLeft.Yes;
+            trackBar1.Size = new Size(205, 45);
+            trackBar1.TabIndex = 1;
+            // 
             // Form5
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -51,14 +62,19 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(trackBar1);
             Controls.Add(button1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form5";
             Text = "Form5";
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button button1;
+        private TrackBar trackBar1;
     }
 }

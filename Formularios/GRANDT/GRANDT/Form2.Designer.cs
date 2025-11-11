@@ -263,6 +263,7 @@
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form2";
             Text = "GRAN DT";
             groupBox1.ResumeLayout(false);

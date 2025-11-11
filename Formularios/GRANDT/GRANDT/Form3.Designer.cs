@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             button2 = new Button();
             button1 = new Button();
+            label3 = new Label();
+            label1 = new Label();
             SuspendLayout();
             // 
             // button2
@@ -59,6 +61,30 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+            label3.ForeColor = SystemColors.Control;
+            label3.Location = new Point(878, 201);
+            label3.Name = "label3";
+            label3.Size = new Size(97, 20);
+            label3.TabIndex = 6;
+            label3.Text = "Presupuesto:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+            label1.ForeColor = SystemColors.Control;
+            label1.Location = new Point(650, 458);
+            label1.Name = "label1";
+            label1.Size = new Size(61, 20);
+            label1.TabIndex = 7;
+            label1.Text = "Equipo:";
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -66,17 +92,23 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1088, 584);
+            Controls.Add(label1);
+            Controls.Add(label3);
             Controls.Add(button1);
             Controls.Add(button2);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form3";
             Text = "GRAN DT";
             Load += Form3_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button button2;
         private Button button1;
+        private Label label3;
+        private Label label1;
     }
 }

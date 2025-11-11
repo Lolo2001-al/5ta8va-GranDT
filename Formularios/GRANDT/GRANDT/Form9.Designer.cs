@@ -76,6 +76,7 @@
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form9";
             Text = "GRAN DT";
             ResumeLayout(false);

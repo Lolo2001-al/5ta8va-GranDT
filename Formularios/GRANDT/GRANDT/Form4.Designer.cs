@@ -65,6 +65,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(button2);
             Controls.Add(button1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form4";
             Text = "GRAN DT";
             ResumeLayout(false);
