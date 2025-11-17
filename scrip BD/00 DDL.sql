@@ -30,7 +30,7 @@ ENGINE = InnoDB;
 -- Table 5to_GranDT.TipoJugador
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS 5to_GranDT.TipoJugador (
-  idTipoJugador INT NOT NULL AUTO_INCREMENT,
+  idTipoJugador INT UNSIGNED NOT NULL AUTO_INCREMENT,
   Nombre VARCHAR(45) NOT NULL,
   PRIMARY KEY (idTipoJugador),
   UNIQUE INDEX TipoJugador_UNIQUE (Nombre ASC) VISIBLE)
@@ -43,12 +43,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS 5to_GranDT.Futbolistas (
   idFutbolista INT NOT NULL AUTO_INCREMENT,
   idEquipo INT UNSIGNED NOT NULL,
-  idTipoJugador INT NOT NULL,
+  idTipoJugador INT UNSIGNED  NOT NULL,
   Nombre VARCHAR(45) NOT NULL,
   Apellido VARCHAR(45) NOT NULL,
   Apodo VARCHAR(45),
   FechaDeNacimiento DATE NOT NULL,
-  Cotizacion DOUBLE UNSIGNED NOT NULL,
+  Cotizacion DECIMAL(10,2) UNSIGNED NOT NULL,
   PRIMARY KEY (idFutbolista, idEquipo, idTipoJugador),
   INDEX fk_Futbolistas_Equipo1_idx (idEquipo ASC) VISIBLE,
   INDEX fk_Futbolistas_TipoJugador1_idx (idTipoJugador ASC) VISIBLE,
@@ -111,7 +111,7 @@ ENGINE = InnoDB;
 -- Table 5to_GranDT.PlantillaFutbolista
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS 5to_GranDT.PlantillaFutbolista (
-  Titular TINYINT NOT NULL,
+  esTitular TINYINT NOT NULL,
   idPlantilla INT NOT NULL,
   idFutbolista INT NOT NULL,
   PRIMARY KEY (idPlantilla, idFutbolista),

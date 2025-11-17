@@ -66,7 +66,7 @@ CREATE PROCEDURE altaPlantillaTitular(
     IN UnesTitular TINYINT
 )
 BEGIN
-    INSERT INTO PlantillaTitular (idFutbolista, idPlantilla, esTitular)
+    INSERT INTO PlantillaFutbolista (idFutbolista, idPlantilla, esTitular)
     VALUES (UnidFutbolista, UnidPlantilla, UnesTitular);
 END;
 //
@@ -106,7 +106,7 @@ CREATE PROCEDURE actualizarPlantillaTitular(
     IN UnesTitular TINYINT
 )
 BEGIN
-    UPDATE PlantillaTitular
+    UPDATE PlantillaFutbolista
     SET esTitular = UnesTitular
     WHERE idFutbolista = UnidFutbolista AND idPlantilla = UnidPlantilla;
 END;
@@ -139,7 +139,7 @@ BEGIN
         Apodo,
         FechadeNacimiento,
         Cotizacion
-    FROM Futbolista
+    FROM Futbolistas
     WHERE idTipoJugador= UnIdTipoJugador
       AND idEquipo = UnIdEquipo
     ORDER BY Apellido;

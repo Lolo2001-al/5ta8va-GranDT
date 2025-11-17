@@ -1,10 +1,9 @@
 
-namespace GranDT.Core
-{
+namespace GranDT.Core;
+
     public class TipoJugador
     {
-        public uint IdTipo { get; set; }
+        public uint idTipoJugador { get; set; } = uint.MinValue;
         public string Nombre { get; set; } = string.Empty;
 
     }
-}

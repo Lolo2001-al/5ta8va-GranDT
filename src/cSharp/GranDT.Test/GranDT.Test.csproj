@@ -18,4 +18,9 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GranDT.Dapper\GranDT.Dapper.csproj" />
+    <ProjectReference Include="..\GranDT.Core\GranDT.Core.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,65 +1,100 @@
+using System.Data;
 using Dapper;
 using GranDT.Core;
 using GranDT.Core.Repos;
-using System.Data;
 
 namespace GranDT.Dapper;
 
 public class RepoFutbolista : Repo, IRepoFutbolista
 {
+    // Recibe la conexión
     public RepoFutbolista(IDbConnection conexion) : base(conexion) { }
 
-    public int altaTipo(string nombre)
+    private static readonly string spAltaFutbolista = "altaFutbolista";
+    private static readonly string spTraerFutbolistasBasico = "traerFutbolistasBasicoXTipoXEquipo";
+    private static readonly string spAltaTipo = "altaTipo";
+    private static readonly string spAltaEquipo = "altaEquipo";
+    private static readonly string spTraerEquipo = "traerEquipo";
+    private static readonly string spAltaPuntuacion = "altaPuntuacion";
+
+
+    public int AltaFutbolista(Futbolistas futbolistas)
     {
         var p = new DynamicParameters();
-        p.Add("UnNombre", nombre);
-        p.Add("AIidTipo", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-        _conexion.Execute("altaTipo", p, commandType: CommandType.StoredProcedure);
-
-        return p.Get<int>("AIidTipo");
-    }
-
-    public int altaEquipo(string nombre)
-    {
-        var p = new DynamicParameters();
-        // El SP altaEquipo tiene el parámetro IN llamado `Nombre`
-        p.Add("Nombre", nombre);
-        p.Add("AIidEquipo", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-        _conexion.Execute("altaEquipo", p, commandType: CommandType.StoredProcedure);
-
-        return p.Get<int>("AIidEquipo");
-    }
-
-    public int altaFutbolista(Futbolista futbolista)
-    {
-        var p = new DynamicParameters();
-        p.Add("UnNombre", futbolista.Nombre);
-        p.Add("UnApellido", futbolista.Apellido);
-        p.Add("UnApodo", futbolista.Apodo);
-        p.Add("UnFechadeNacimiento", futbolista.FechadeNacimiento);
-        p.Add("UnCotizacion", futbolista.Cotizacion);
-        p.Add("UnidTipo", futbolista.IdTipo);
-        p.Add("UnidEquipos", futbolista.IdEquipo);
+        
+        // Parámetros de entrada (IN)
+        p.Add("UnNombre", futbolistas.Nombre);
+        p.Add("UnApellido", futbolistas.Apellido);
+        p.Add("UnApodo", futbolistas.Apodo);
+        p.Add("UnFechaDeNacimiento", futbolistas.FechadeNacimiento);
+        p.Add("UnCotizacion", futbolistas.Cotizacion);
+        p.Add("UnidTipoJugador", futbolistas.idTipoJugador);
+        p.Add("UnidEquipo", futbolistas.idEquipo);
+        
+        // Parámetro de salida (OUT)
         p.Add("AIidFutbolista", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-        _conexion.Execute("altaFutbolista", p, commandType: CommandType.StoredProcedure);
+        _conexion.Execute(spAltaFutbolista, p, commandType: CommandType.StoredProcedure);
 
         return p.Get<int>("AIidFutbolista");
     }
 
-    public int altaPuntuacion(uint IdFutbolista, Puntuacion puntuacion)
+    public IEnumerable<Futbolistas> TraerFutbolistasBasicoXTipoXEquipo(uint idTipoJugador, uint idEquipo)
     {
         var p = new DynamicParameters();
-        p.Add("UnfechaNro", puntuacion.FechaNro);
-        p.Add("UnPuntuacion", puntuacion.Puntos);
-        p.Add("UnidFutbolista", IdFutbolista);
-        p.Add("AIidpuntuacion", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        p.Add("UnIdTipoJugador", idTipoJugador);
+        p.Add("UnIdEquipo", idEquipo);
 
-        _conexion.Execute("altaPuntuacion", p, commandType: CommandType.StoredProcedure);
-
-        return p.Get<int>("AIidpuntuacion");
+        return _conexion.Query<Futbolistas>(
+            spTraerFutbolistasBasico,
+            p,
+            commandType: CommandType.StoredProcedure
+        ).ToList();
     }
 
+    // --- Operaciones de Tipo de Jugador (Posición) ---
+
+    public uint idTipoJugador(string Nombre)
+    {
+        var p = new DynamicParameters();
+        p.Add("UnNombre", Nombre);
+        p.Add("AIidTipoJugador", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+        _conexion.Execute(spAltaTipo, p, commandType: CommandType.StoredProcedure);
+        return p.Get<uint>("AIidTipoJugador");
+    }
+
+    // --- Operaciones de Equipo ---
+
+    public uint AltaEquipo(string Nombre)
+    {
+        var p = new DynamicParameters();
+        p.Add("UnNombre", Nombre);
+        p.Add("AIidEquipo", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+        _conexion.Execute(spAltaEquipo, p, commandType: CommandType.StoredProcedure);
+        return p.Get<uint>("AIidEquipo");
+    }
+
+    public IEnumerable<Equipo> TraerEquipo()
+    {
+        return _conexion.Query<Equipo>(
+            spTraerEquipo,
+            commandType: CommandType.StoredProcedure
+        ).ToList();
+    }
+
+    // --- Operaciones de Puntuación ---
+
+    public int AltaPuntuacion(Puntuacion puntuacion, int idFutbolista)
+    {
+        var p = new DynamicParameters();
+        p.Add("UnFechaPartido", puntuacion.FechaPartido);
+        p.Add("UnNota", puntuacion.Nota);
+        p.Add("UnidFutbolista", idFutbolista);
+        p.Add("AIidpuntuacion", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+        _conexion.Execute(spAltaPuntuacion, p, commandType: CommandType.StoredProcedure);
+        return p.Get<int>("AIidpuntuacion");
+    }
 }

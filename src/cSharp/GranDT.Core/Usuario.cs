@@ -1,7 +1,7 @@
 
 
-namespace GranDT.Core
-{
+namespace GranDT.Core;
+
     public class Usuario
     {
         public uint IdUsuario { get; set; }
@@ -12,5 +12,5 @@ namespace GranDT.Core
         public required string Contrasena { get; set; } = string.Empty;
         public bool esAdmin { get; set; }
     }
-}
+
 

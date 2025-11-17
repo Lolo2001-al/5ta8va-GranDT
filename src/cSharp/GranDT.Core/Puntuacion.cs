@@ -2,8 +2,13 @@ namespace GranDT.Core;
 
 public class Puntuacion
 {
-    public  uint IdPuntuacion { get; set; }
-    public  byte FechaNro { get; set; }
-    public decimal? Puntos { get; set; }
-    public uint idFutbolista { get; set; } 
+
+    public int idPuntuacion { get; set; } = int.MinValue;
+    public uint idFutbolista { get; set; }
+    
+    public decimal? Nota { get; set; }
+
+    public DateTime? FechaPartido { get; set; }
+
+    public Futbolistas? Futbolista { get; set; }
 }

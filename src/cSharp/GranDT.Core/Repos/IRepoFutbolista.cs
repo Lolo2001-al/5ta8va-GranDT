@@ -1,10 +1,12 @@
 namespace GranDT.Core.Repos;
 
-public interface IRepoFutbolista
-{
-    int altaTipo(string nombre);
-    int altaFutbolista(Futbolista futbolista);
-    int altaEquipo(string nombre);
-    int altaPuntuacion(uint IdFutbolista, Puntuacion puntuacion);
-}
- 
+    public interface IRepoFutbolista
+    {
+
+        int AltaFutbolista(Futbolistas futbolistas);
+        IEnumerable<Futbolistas> TraerFutbolistasBasicoXTipoXEquipo(uint idTipoJugador, uint idEquipo);
+        uint idTipoJugador(string Nombre);
+        uint AltaEquipo(string Nombre);
+        IEnumerable<Equipo> TraerEquipo();
+        int AltaPuntuacion(Puntuacion puntuacion, int idFutbolista);
+    }

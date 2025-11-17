@@ -115,3 +115,5 @@ CALL altaFutbolista('Eros','Mancuso',NULL,'1999-03-14',7500000,@idTipo2,@idEDLP,
 CALL altaFutbolista('Nicolas','Palavecino',NULL,'1998-04-22',7200000,@idTipo3,@idEDLP,@idFut91);
 CALL altaFutbolista('Tiago','Palacios',NULL,'2001-04-16',8100000,@idTipo3,@idEDLP,@idFut92);
 
+CALL altaUsuario('Lionel','Messi','l.messi@example.com','1987-06-24','antiruchis3mil',1,@UsuarioAdmin);
+CALL altaPlantilla(10000000,'MiGranDT',@UsuarioAdmin,@idBoca,25,@Plantillanazi);
