@@ -113,7 +113,7 @@ public class RepoUsuarioTests : TestRepo
 
         Usuario? resultado = repoUsuario.LoginUsuario(email, contrasena);
 
-        Assert.NotNull(resultado);
+        Assert.No-+tNull(resultado);
     }
 
     [Fact]

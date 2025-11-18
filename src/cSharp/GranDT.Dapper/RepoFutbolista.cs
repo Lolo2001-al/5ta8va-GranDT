@@ -5,7 +5,7 @@ using GranDT.Core.Repos;
 
 namespace GranDT.Dapper;
 
-public class RepoFutbolista : Repo, IRepoFutbolista
+public class RepoFutbolista : Repo, IRepoFutbolista//
 {
     // Recibe la conexión
     public RepoFutbolista(IDbConnection conexion) : base(conexion) { }
