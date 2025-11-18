@@ -112,9 +112,11 @@ namespace GRANDT
             }
 
             Plantillas plantillaSeleccionada = _plantillasUsuario[PlantillaComboBox.SelectedIndex];
-            MessageBox.Show($"Plantilla seleccionada: {plantillaSeleccionada.Nombre}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             
-            // Aquí puedes navegar a otra pantalla con la plantilla seleccionada
+            // Abrir AltaFutbolista con la plantilla seleccionada
+            AltaFutbolista formAltaFutbolista = new AltaFutbolista(plantillaSeleccionada);
+            formAltaFutbolista.Show();
+            this.Hide();
         }
     }
 }

@@ -238,5 +238,6 @@
         private Label label5;
         private Label label6;
         private MaskedTextBox NacimientoBox;
+        private RichTextBox NombreBox;
     }
 }

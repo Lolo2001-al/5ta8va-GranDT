@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GranDT.Dapper", "GranDT.Dap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GranDT.Core", "GranDT.Core\GranDT.Core.csproj", "{78494E3F-AE49-49BF-B10A-01B523252C63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GRANDT", "GranDT.Winf\GRANDT.csproj", "{B25379D1-931A-FA67-993C-FB918AD47F3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{78494E3F-AE49-49BF-B10A-01B523252C63}.Release|x64.Build.0 = Release|Any CPU
 		{78494E3F-AE49-49BF-B10A-01B523252C63}.Release|x86.ActiveCfg = Release|Any CPU
 		{78494E3F-AE49-49BF-B10A-01B523252C63}.Release|x86.Build.0 = Release|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Debug|x64.Build.0 = Debug|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Debug|x86.Build.0 = Debug|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Release|x64.ActiveCfg = Release|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Release|x64.Build.0 = Release|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Release|x86.ActiveCfg = Release|Any CPU
+		{B25379D1-931A-FA67-993C-FB918AD47F3A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -105,7 +105,7 @@ namespace GRANDT
                 GranDT.Core.Plantillas nuevaPlantilla = new GranDT.Core.Plantillas
                 {
                     Nombre = NombreBox.Text.Trim(),
-                    idUsuario = (int)_usuarioLogeado.idUsuario,
+                    idUsuario = (int)_usuarioLogeado.IdUsuario,
                     idEquipo = (uint)(EquipoBox.SelectedIndex + 1), // Usar índice como ID por ahora
                     Presupuesto = 65000000, // Presupuesto fijo por ahora
                     MaxJugadores = 11 // Máximo de jugadores por defecto

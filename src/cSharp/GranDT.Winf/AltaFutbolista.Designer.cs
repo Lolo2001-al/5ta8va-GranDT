@@ -106,6 +106,7 @@
             TipoComboBox.Name = "TipoComboBox";
             TipoComboBox.Size = new Size(81, 23);
             TipoComboBox.TabIndex = 7;
+            TipoComboBox.SelectedIndexChanged += TipoComboBox_SelectedIndexChanged;
             // 
             // Atualizar
             // 
@@ -115,6 +116,7 @@
             Atualizar.TabIndex = 8;
             Atualizar.Text = "Actualizar";
             Atualizar.UseVisualStyleBackColor = true;
+            Atualizar.Click += Atualizar_Click;
             // 
             // Futbolista
             // 
