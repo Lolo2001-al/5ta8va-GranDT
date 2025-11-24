@@ -1,37 +1,44 @@
 ﻿using System;
+using System.IO;
 using System.Media;
 
 namespace GRANDT
 {
-    internal class MusicPlayer
+    internal static class MusicPlayer
     {
         private static SoundPlayer _player;
 
         /// <summary>
-        /// Inicia la música de fondo en loop.
+        /// Inicia la música de fondo en bucle desde la carpeta Resources del proyecto.
         /// </summary>
-        public static void IniciarMusica()
+        /// <param name="nombreArchivo">Nombre del archivo .wav (ej: "musica.wav")</param>
+        public static void IniciarMusica(string nombreArchivo)
         {
-            try
+            // Construimos la ruta completa del archivo dentro de Resources
+            string ruta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", nombreArchivo);
+
+            // Verificamos que el archivo exista
+            if (!File.Exists(ruta))
             {
-                // Ruta exacta del archivo .wav que me pasaste
-                string rutaArchivo = @"C:\Users\agusc\OneDrive\Escritorio\5ta8va-GranDT\src\Resources\musica.wav";
-                _player = new SoundPlayer(rutaArchivo);
-                _player.Load();
-                _player.PlayLooping(); // Reproduce en loop infinito
+                throw new FileNotFoundException($"No se encontró el archivo de música en: {ruta}");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al reproducir música: {ex.Message}");
-            }
+
+            // Creamos el reproductor y reproducimos en bucle
+            _player = new SoundPlayer(ruta);
+            _player.PlayLooping();
         }
 
         /// <summary>
-        /// Detiene la música.
+        /// Detiene la música de fondo.
         /// </summary>
         public static void DetenerMusica()
         {
-            _player?.Stop();
+            if (_player != null)
+            {
+                _player.Stop();
+                _player.Dispose();
+                _player = null;
+            }
         }
     }
 }
