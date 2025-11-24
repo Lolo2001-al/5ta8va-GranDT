@@ -15,6 +15,7 @@ namespace GRANDT
 {
     public partial class AltaFutbolista : Form
     {
+        private Usuario? _usuarioLogeado;
         private Plantillas? _plantillaSeleccionada;
         private IRepoFutbolista? _repoFutbolista;
         private List<TipoJugador> _tiposJugador;
@@ -135,7 +136,7 @@ namespace GRANDT
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form6 form6 = new Form6();
+            Form6 form6 = new Form6(DataGlobals.UsuarioLogueado);
             form6.Show();
             this.Hide();
         }

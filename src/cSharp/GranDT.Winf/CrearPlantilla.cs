@@ -19,16 +19,11 @@ namespace GRANDT
         private IRepoPlantilla? _repoPlantilla;
         private List<Equipo>? _equipos;
 
-        public CrearPlantilla()
-        {
-            InitializeComponent();
-            _equipos = new List<Equipo>();
-        }
-
         public CrearPlantilla(GranDT.Core.Usuario usuario)
         {
             InitializeComponent();
             _usuarioLogeado = usuario;
+            DataGlobals.SetUsuario(_usuarioLogeado);
             _equipos = new List<Equipo>();
         }
 
@@ -67,7 +62,7 @@ namespace GRANDT
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form6 form6 = new Form6();
+            Form6 form6 = new Form6(_usuarioLogeado);
             form6.Show();
             this.Hide();
         }

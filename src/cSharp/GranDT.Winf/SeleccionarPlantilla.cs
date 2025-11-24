@@ -19,6 +19,16 @@ namespace GRANDT
         private IRepoPlantilla? _repoPlantilla;
         private List<Plantillas>? _plantillasUsuario;
 
+        private void VerificarUsuarioLogueado()
+        {
+            if (!DataGlobals.EstaLogueado())
+            {
+                MessageBox.Show("Usuario no logeado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                InicioSecion f = new InicioSecion();
+                f.Show();
+                this.Close();
+            }
+        }
         public SeleccionarPlantilla()
         {
             InitializeComponent();
@@ -28,8 +38,10 @@ namespace GRANDT
         public SeleccionarPlantilla(GranDT.Core.Usuario usuario)
         {
             InitializeComponent();
+            DataGlobals.SetUsuario(usuario);
             _usuarioLogeado = usuario;
             _plantillasUsuario = new List<Plantillas>();
+            VerificarUsuarioLogueado();
         }
 
         private void Form_Load(object sender, EventArgs e)
@@ -98,22 +110,21 @@ namespace GRANDT
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form6 form6 = new Form6();
+            Form6 form6 = new Form6(_usuarioLogeado);
             form6.Show();
             this.Hide();
         }
 
-        private void Seleccionarplantilla_Click(object sender, EventArgs e)
-        {
-            if (PlantillaComboBox.SelectedIndex < 0 || _plantillasUsuario == null || _plantillasUsuario.Count == 0)
-            {
-                MessageBox.Show("Por favor, selecciona una plantilla", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+        
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
             Plantillas plantillaSeleccionada = _plantillasUsuario[PlantillaComboBox.SelectedIndex];
-            
-            // Abrir AltaFutbolista con la plantilla seleccionada
             AltaFutbolista formAltaFutbolista = new AltaFutbolista(plantillaSeleccionada);
             formAltaFutbolista.Show();
             this.Hide();

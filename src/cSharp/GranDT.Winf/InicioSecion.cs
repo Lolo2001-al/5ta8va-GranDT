@@ -49,6 +49,8 @@ namespace GRANDT
 
                 if (_usuarioLogeado != null)
                 {
+                    DataGlobals.SetUsuario(_usuarioLogeado);
+
                     MessageBox.Show($"Bienvenido {_usuarioLogeado.Nombre}!", "Inicio de Sesión Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
                     // Pasar el usuario logeado a la siguiente pantalla

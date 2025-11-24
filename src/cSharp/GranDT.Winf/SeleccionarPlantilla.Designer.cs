@@ -32,7 +32,7 @@
             button1 = new Button();
             CrearPlantilla = new Button();
             PlantillaComboBox = new ComboBox();
-            Seleccionarplantilla = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -65,17 +65,18 @@
             PlantillaComboBox.Size = new Size(121, 23);
             PlantillaComboBox.TabIndex = 3;
             // 
-            // Seleccionarplantilla
+            // button2
             // 
-            Seleccionarplantilla.BackColor = Color.Transparent;
-            Seleccionarplantilla.FlatStyle = FlatStyle.Popup;
-            Seleccionarplantilla.Location = new Point(330, 170);
-            Seleccionarplantilla.Name = "Seleccionarplantilla";
-            Seleccionarplantilla.Size = new Size(121, 30);
-            Seleccionarplantilla.TabIndex = 4;
-            Seleccionarplantilla.Text = "Seleccionar";
-            Seleccionarplantilla.UseVisualStyleBackColor = false;
-            Seleccionarplantilla.Click += Seleccionarplantilla_Click;
+            button2.BackColor = Color.Transparent;
+            button2.FlatStyle = FlatStyle.Popup;
+            button2.ForeColor = SystemColors.ButtonHighlight;
+            button2.Location = new Point(330, 176);
+            button2.Name = "button2";
+            button2.Size = new Size(121, 28);
+            button2.TabIndex = 4;
+            button2.Text = "SELECCIONAR";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click_1;
             // 
             // SeleccionarPlantilla
             // 
@@ -84,7 +85,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
-            Controls.Add(Seleccionarplantilla);
+            Controls.Add(button2);
             Controls.Add(PlantillaComboBox);
             Controls.Add(CrearPlantilla);
             Controls.Add(button1);
@@ -101,5 +102,6 @@
         private Button Seleccionarplantilla;
         private Button CrearPlantilla;
         private ComboBox PlantillaComboBox;
+        private Button button2;
     }
 }
