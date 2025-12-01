@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace GRANDT
 {
- 
+
     public partial class Form5 : Form
     {
         private Usuario? _usuarioLogeado;
@@ -32,6 +32,24 @@ namespace GRANDT
             Form6 form6 = new Form6(_usuarioLogeado);
             form6.Show();
             this.Hide();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+               if(!MusicPlayer.EstaSonando)
+                MusicPlayer.IniciarMusica("musica.wav");
+            }
+            else
+            {
+                MusicPlayer.DetenerMusica();
+            }
+        }
+
+        private void Form5_Load(object sender, EventArgs e)
+        {
+            checkBox1.Checked = true;
         }
     }
 }

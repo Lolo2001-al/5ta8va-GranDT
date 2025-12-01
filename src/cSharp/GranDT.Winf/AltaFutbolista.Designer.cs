@@ -38,6 +38,7 @@
             TipoComboBox = new ComboBox();
             Atualizar = new Button();
             Futbolista = new ComboBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)FutbolistasDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -67,9 +68,9 @@
             // FutbolistasDataGridView
             // 
             FutbolistasDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            FutbolistasDataGridView.Location = new Point(295, 77);
+            FutbolistasDataGridView.Location = new Point(295, 20);
             FutbolistasDataGridView.Name = "FutbolistasDataGridView";
-            FutbolistasDataGridView.Size = new Size(340, 311);
+            FutbolistasDataGridView.Size = new Size(466, 386);
             FutbolistasDataGridView.TabIndex = 2;
             // 
             // NombreF
@@ -126,13 +127,26 @@
             Futbolista.Size = new Size(81, 23);
             Futbolista.TabIndex = 9;
             // 
-            // Form4
+            // button1
+            // 
+            button1.BackColor = Color.Transparent;
+            button1.BackgroundImageLayout = ImageLayout.None;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.Location = new Point(625, 413);
+            button1.Name = "button1";
+            button1.Size = new Size(178, 25);
+            button1.TabIndex = 10;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // AltaFutbolista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(button1);
             Controls.Add(Futbolista);
             Controls.Add(Atualizar);
             Controls.Add(TipoComboBox);
@@ -143,7 +157,7 @@
             Controls.Add(button2);
             Controls.Add(Fichar);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "Form4";
+            Name = "AltaFutbolista";
             Text = "GRAN DT";
             Load += Form4_Load;
             ((System.ComponentModel.ISupportInitialize)FutbolistasDataGridView).EndInit();
@@ -162,5 +176,6 @@
         private ComboBox TipoComboBox;
         private Button Atualizar;
         private ComboBox Futbolista;
+        private Button button1;
     }
 }

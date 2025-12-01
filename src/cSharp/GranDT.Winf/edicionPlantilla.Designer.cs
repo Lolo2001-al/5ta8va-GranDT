@@ -1,6 +1,6 @@
 ﻿namespace GRANDT
 {
-    partial class Form5
+    partial class edicionPlantilla
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form5));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(edicionPlantilla));
             button1 = new Button();
-            checkBox1 = new CheckBox();
             SuspendLayout();
             // 
             // button1
@@ -38,47 +37,31 @@
             button1.BackColor = Color.Transparent;
             button1.BackgroundImageLayout = ImageLayout.None;
             button1.FlatStyle = FlatStyle.Popup;
-            button1.Location = new Point(-7, 403);
+            button1.ForeColor = Color.Transparent;
+            button1.Location = new Point(644, 413);
             button1.Name = "button1";
-            button1.Size = new Size(152, 35);
+            button1.Size = new Size(163, 25);
             button1.TabIndex = 0;
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.BackColor = SystemColors.ButtonHighlight;
-            checkBox1.FlatStyle = FlatStyle.Popup;
-            checkBox1.ForeColor = SystemColors.ActiveCaptionText;
-            checkBox1.Location = new Point(190, 152);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(68, 19);
-            checkBox1.TabIndex = 1;
-            checkBox1.Text = "MUSICA";
-            checkBox1.UseVisualStyleBackColor = false;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
-            // 
-            // Form5
+            // edicionPlantilla
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
-            Controls.Add(checkBox1);
             Controls.Add(button1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "Form5";
-            Text = "Form5";
-            Load += Form5_Load;
+            Name = "edicionPlantilla";
+            Text = "GRANDT";
+            Load += edicionPlantilla_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Button button1;
-        private CheckBox checkBox1;
     }
 }

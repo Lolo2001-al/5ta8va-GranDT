@@ -150,5 +150,12 @@ namespace GRANDT
         {
             ActualizarFutbolistas();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            edicionPlantilla edicionPlantilla = new edicionPlantilla(_plantillaSeleccionada);
+            edicionPlantilla.Show();
+            this.Hide();
+        }
     }
 }

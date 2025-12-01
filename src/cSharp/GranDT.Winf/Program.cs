@@ -1,6 +1,7 @@
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.IO;
+using System.Media;
 using System.Resources;
 using System.Windows.Forms;
 
@@ -13,7 +14,6 @@ namespace GRANDT
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             MusicPlayer.IniciarMusica("musica.wav");
             Application.Run(new InicioSecion());
         }

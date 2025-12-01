@@ -30,11 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InicioSecion));
             groupBox1 = new GroupBox();
+            textBox1 = new TextBox();
             linkLabel1 = new LinkLabel();
             IniciarSecion = new Button();
-            confirmarPasswordBox = new RichTextBox();
-            asd = new Label();
-            PasswordBox = new RichTextBox();
             label2 = new Label();
             EmailBox = new RichTextBox();
             asdd = new Label();
@@ -48,11 +46,9 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.Transparent;
+            groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(linkLabel1);
             groupBox1.Controls.Add(IniciarSecion);
-            groupBox1.Controls.Add(confirmarPasswordBox);
-            groupBox1.Controls.Add(asd);
-            groupBox1.Controls.Add(PasswordBox);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(EmailBox);
             groupBox1.Controls.Add(asdd);
@@ -62,6 +58,15 @@
             groupBox1.Size = new Size(309, 384);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(6, 114);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(297, 23);
+            textBox1.TabIndex = 9;
+            textBox1.UseSystemPasswordChar = true;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // linkLabel1
             // 
@@ -87,38 +92,6 @@
             IniciarSecion.Text = "Iniciar Sesion";
             IniciarSecion.UseVisualStyleBackColor = false;
             IniciarSecion.Click += IniciarSecion_Click;
-            // 
-            // confirmarPasswordBox
-            // 
-            confirmarPasswordBox.BackColor = Color.White;
-            confirmarPasswordBox.BorderStyle = BorderStyle.None;
-            confirmarPasswordBox.Location = new Point(6, 186);
-            confirmarPasswordBox.Name = "confirmarPasswordBox";
-            confirmarPasswordBox.Size = new Size(297, 21);
-            confirmarPasswordBox.TabIndex = 6;
-            confirmarPasswordBox.Text = "";
-            // 
-            // asd
-            // 
-            asd.AutoSize = true;
-            asd.BackColor = Color.Transparent;
-            asd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            asd.ForeColor = SystemColors.Control;
-            asd.Location = new Point(6, 162);
-            asd.Name = "asd";
-            asd.Size = new Size(181, 21);
-            asd.TabIndex = 5;
-            asd.Text = "Confirmar Contraseña ";
-            // 
-            // PasswordBox
-            // 
-            PasswordBox.BackColor = Color.White;
-            PasswordBox.BorderStyle = BorderStyle.None;
-            PasswordBox.Location = new Point(6, 114);
-            PasswordBox.Name = "PasswordBox";
-            PasswordBox.Size = new Size(297, 21);
-            PasswordBox.TabIndex = 4;
-            PasswordBox.Text = "";
             // 
             // label2
             // 
@@ -206,11 +179,9 @@
         private RichTextBox EmailBox;
         private LinkLabel linkLabel1;
         private Button IniciarSecion;
-        private RichTextBox confirmarPasswordBox;
-        private Label asd;
-        private RichTextBox PasswordBox;
         private Label label2;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private TextBox textBox1;
     }
 }

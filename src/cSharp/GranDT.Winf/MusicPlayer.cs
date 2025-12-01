@@ -7,7 +7,7 @@ namespace GRANDT
     internal static class MusicPlayer
     {
         private static SoundPlayer _player;
-
+        public static bool EstaSonando => _player != null;
         /// <summary>
         /// Inicia la música de fondo en bucle desde la carpeta Resources del proyecto.
         /// </summary>
