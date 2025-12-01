@@ -30,33 +30,33 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reguistro));
             groupBox1 = new GroupBox();
+            textBox1 = new TextBox();
+            NacimientoBox = new MaskedTextBox();
             label6 = new Label();
             ApellidoBox = new RichTextBox();
             label5 = new Label();
-            this.NombreBox = new RichTextBox();
+            NombreBox = new RichTextBox();
             label4 = new Label();
             linkLabel1 = new LinkLabel();
             ReguistrarseButton = new Button();
-            richTextBox3 = new RichTextBox();
             label3 = new Label();
             label2 = new Label();
             EmailBox = new RichTextBox();
-            NacimientoBox = new MaskedTextBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
             groupBox1.BackColor = Color.Transparent;
+            groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(NacimientoBox);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(ApellidoBox);
             groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(this.NombreBox);
+            groupBox1.Controls.Add(NombreBox);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(linkLabel1);
             groupBox1.Controls.Add(ReguistrarseButton);
-            groupBox1.Controls.Add(richTextBox3);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(EmailBox);
@@ -68,6 +68,23 @@
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Enter += groupBox1_Enter;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(6, 208);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(298, 23);
+            textBox1.TabIndex = 15;
+            textBox1.UseSystemPasswordChar = true;
+            // 
+            // NacimientoBox
+            // 
+            NacimientoBox.Location = new Point(7, 79);
+            NacimientoBox.Mask = "0000-00-00";
+            NacimientoBox.Name = "NacimientoBox";
+            NacimientoBox.Size = new Size(121, 23);
+            NacimientoBox.TabIndex = 14;
+            NacimientoBox.ValidatingType = typeof(DateTime);
             // 
             // label6
             // 
@@ -106,13 +123,13 @@
             // 
             // NombreBox
             // 
-            this.NombreBox.BackColor = Color.White;
-            this.NombreBox.BorderStyle = BorderStyle.None;
-            this.NombreBox.Location = new Point(6, 37);
-            this.NombreBox.Name = "NombreBox";
-            this.NombreBox.Size = new Size(135, 21);
-            this.NombreBox.TabIndex = 10;
-            this.NombreBox.Text = "";
+            NombreBox.BackColor = Color.White;
+            NombreBox.BorderStyle = BorderStyle.None;
+            NombreBox.Location = new Point(6, 37);
+            NombreBox.Name = "NombreBox";
+            NombreBox.Size = new Size(135, 21);
+            NombreBox.TabIndex = 10;
+            NombreBox.Text = "";
             // 
             // label4
             // 
@@ -151,16 +168,6 @@
             ReguistrarseButton.UseVisualStyleBackColor = false;
             ReguistrarseButton.Click += button1_Click;
             // 
-            // richTextBox3
-            // 
-            richTextBox3.BackColor = Color.White;
-            richTextBox3.BorderStyle = BorderStyle.None;
-            richTextBox3.Location = new Point(5, 207);
-            richTextBox3.Name = "richTextBox3";
-            richTextBox3.Size = new Size(297, 21);
-            richTextBox3.TabIndex = 6;
-            richTextBox3.Text = "";
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -195,15 +202,6 @@
             EmailBox.TabIndex = 2;
             EmailBox.Text = "";
             // 
-            // NacimientoBox
-            // 
-            NacimientoBox.Location = new Point(7, 79);
-            NacimientoBox.Mask = "0000-00-00";
-            NacimientoBox.Name = "NacimientoBox";
-            NacimientoBox.Size = new Size(121, 23);
-            NacimientoBox.TabIndex = 14;
-            NacimientoBox.ValidatingType = typeof(DateTime);
-            // 
             // Reguistro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -226,7 +224,6 @@
         private GroupBox groupBox1;
         private LinkLabel linkLabel1;
         private Button ReguistrarseButton;
-        private RichTextBox richTextBox3;
         private Label label3;
         private RichTextBox ApellidoBox;
         private Label label2;
@@ -239,5 +236,6 @@
         private Label label6;
         private MaskedTextBox NacimientoBox;
         private RichTextBox NombreBox;
+        private TextBox textBox1;
     }
 }

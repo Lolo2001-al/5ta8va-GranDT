@@ -41,7 +41,7 @@ namespace GRANDT
             if (string.IsNullOrWhiteSpace(NombreBox.Text) ||
                 string.IsNullOrWhiteSpace(ApellidoBox.Text) ||
                 string.IsNullOrWhiteSpace(EmailBox.Text) ||
-                string.IsNullOrWhiteSpace(richTextBox3.Text) ||
+                string.IsNullOrWhiteSpace(textBox1.Text) ||
                 string.IsNullOrWhiteSpace(NacimientoBox.Text))
             {
                 MessageBox.Show("Por favor, completa todos los campos", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -64,7 +64,7 @@ namespace GRANDT
                     Apellido = ApellidoBox.Text.Trim(),
                     Email = EmailBox.Text.Trim(),
                     FechadeNacimiento = fechaNacimiento,
-                    Contrasena = richTextBox3.Text,
+                    Contrasena = textBox1.Text,
                     esAdmin = false
                 };
 
@@ -99,7 +99,7 @@ namespace GRANDT
             NombreBox.Clear();
             ApellidoBox.Clear();
             EmailBox.Clear();
-            richTextBox3.Clear();
+            textBox1.Clear();
             NacimientoBox.Clear();
         }
 
