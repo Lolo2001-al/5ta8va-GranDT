@@ -9,7 +9,7 @@ namespace GRANDT
     /// </summary>
     public class Conexion
     {
-        private const string _cadena = "Server=localhost;User ID=root;Password=;Database=5to_GranDT;";
+        private const string _cadena = "Server=localhost;User ID=root;Password=root;Database=5to_GranDT;";
         
         public static IDbConnection ObtenerConexion()
         {

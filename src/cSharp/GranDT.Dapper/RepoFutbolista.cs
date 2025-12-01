@@ -66,14 +66,14 @@ public class RepoFutbolista : Repo, IRepoFutbolista//
 
     // --- Operaciones de Equipo ---
 
-    public uint AltaEquipo(string Nombre)
+    public int AltaEquipo(string Nombre)
     {
         var p = new DynamicParameters();
         p.Add("UnNombre", Nombre);
         p.Add("AIidEquipo", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
         _conexion.Execute(spAltaEquipo, p, commandType: CommandType.StoredProcedure);
-        return p.Get<uint>("AIidEquipo");
+        return p.Get<int>("AIidEquipo");
     }
 
     public IEnumerable<Equipo> TraerEquipo()

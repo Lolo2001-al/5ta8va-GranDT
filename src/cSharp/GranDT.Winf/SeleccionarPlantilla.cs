@@ -52,6 +52,20 @@ namespace GRANDT
 
             // Cargar las plantillas del usuario logeado
             CargarPlantillas();
+
+            // Mostrar botones de administración si el usuario es admin
+            if (_usuarioLogeado != null && _usuarioLogeado.esAdmin)
+            {
+                btnAltaEquipo.Visible = true;
+                btnAltaJugadorAdmin.Visible = true;
+                btnAltaPuntuacion.Visible = true;
+            }
+            else
+            {
+                btnAltaEquipo.Visible = false;
+                btnAltaJugadorAdmin.Visible = false;
+                btnAltaPuntuacion.Visible = false;
+            }
         }
 
         private void SeleccionarPlantilla_Load(object sender, EventArgs e)
@@ -127,6 +141,29 @@ namespace GRANDT
             Plantillas plantillaSeleccionada = _plantillasUsuario[PlantillaComboBox.SelectedIndex];
             AltaFutbolista formAltaFutbolista = new AltaFutbolista(plantillaSeleccionada);
             formAltaFutbolista.Show();
+            this.Hide();
+        }
+
+        // Admin button handlers
+        private void btnAltaEquipo_Click(object? sender, EventArgs e)
+        {
+            AltaEquipoForm f = new AltaEquipoForm();
+            f.Show();
+            this.Hide();
+        }
+
+        private void btnAltaJugadorAdmin_Click(object? sender, EventArgs e)
+        {
+            // Open the admin AltaFutbolista form
+            AltaFutbolistaAdminForm f = new AltaFutbolistaAdminForm();
+            f.Show();
+            this.Hide();
+        }
+
+        private void btnAltaPuntuacion_Click(object? sender, EventArgs e)
+        {
+            AltaPuntuacionForm f = new AltaPuntuacionForm();
+            f.Show();
             this.Hide();
         }
     }

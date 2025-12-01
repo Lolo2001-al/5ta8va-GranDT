@@ -33,6 +33,9 @@
             CrearPlantilla = new Button();
             PlantillaComboBox = new ComboBox();
             button2 = new Button();
+            btnAltaEquipo = new Button();
+            btnAltaJugadorAdmin = new Button();
+            btnAltaPuntuacion = new Button();
             SuspendLayout();
             // 
             // button1
@@ -78,6 +81,48 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click_1;
             // 
+            // btnAltaEquipo
+            // 
+            btnAltaEquipo.BackColor = Color.Transparent;
+            btnAltaEquipo.FlatStyle = FlatStyle.Popup;
+            btnAltaEquipo.ForeColor = SystemColors.ButtonHighlight;
+            btnAltaEquipo.Location = new Point(600, 20);
+            btnAltaEquipo.Name = "btnAltaEquipo";
+            btnAltaEquipo.Size = new Size(180, 30);
+            btnAltaEquipo.TabIndex = 5;
+            btnAltaEquipo.Text = "Alta Equipo";
+            btnAltaEquipo.UseVisualStyleBackColor = false;
+            btnAltaEquipo.Visible = false;
+            btnAltaEquipo.Click += btnAltaEquipo_Click;
+            // 
+            // btnAltaJugadorAdmin
+            // 
+            btnAltaJugadorAdmin.BackColor = Color.Transparent;
+            btnAltaJugadorAdmin.FlatStyle = FlatStyle.Popup;
+            btnAltaJugadorAdmin.ForeColor = SystemColors.ButtonHighlight;
+            btnAltaJugadorAdmin.Location = new Point(600, 60);
+            btnAltaJugadorAdmin.Name = "btnAltaJugadorAdmin";
+            btnAltaJugadorAdmin.Size = new Size(180, 30);
+            btnAltaJugadorAdmin.TabIndex = 6;
+            btnAltaJugadorAdmin.Text = "Alta Jugador";
+            btnAltaJugadorAdmin.UseVisualStyleBackColor = false;
+            btnAltaJugadorAdmin.Visible = false;
+            btnAltaJugadorAdmin.Click += btnAltaJugadorAdmin_Click;
+            // 
+            // btnAltaPuntuacion
+            // 
+            btnAltaPuntuacion.BackColor = Color.Transparent;
+            btnAltaPuntuacion.FlatStyle = FlatStyle.Popup;
+            btnAltaPuntuacion.ForeColor = SystemColors.ButtonHighlight;
+            btnAltaPuntuacion.Location = new Point(600, 100);
+            btnAltaPuntuacion.Name = "btnAltaPuntuacion";
+            btnAltaPuntuacion.Size = new Size(180, 30);
+            btnAltaPuntuacion.TabIndex = 7;
+            btnAltaPuntuacion.Text = "Alta Puntuación";
+            btnAltaPuntuacion.UseVisualStyleBackColor = false;
+            btnAltaPuntuacion.Visible = false;
+            btnAltaPuntuacion.Click += btnAltaPuntuacion_Click;
+            // 
             // SeleccionarPlantilla
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -85,6 +130,9 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnAltaPuntuacion);
+            Controls.Add(btnAltaJugadorAdmin);
+            Controls.Add(btnAltaEquipo);
             Controls.Add(button2);
             Controls.Add(PlantillaComboBox);
             Controls.Add(CrearPlantilla);
@@ -103,5 +151,8 @@
         private Button CrearPlantilla;
         private ComboBox PlantillaComboBox;
         private Button button2;
+        private Button btnAltaEquipo;
+        private Button btnAltaJugadorAdmin;
+        private Button btnAltaPuntuacion;
     }
 }
