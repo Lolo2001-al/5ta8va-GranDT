@@ -18,6 +18,7 @@ namespace GRANDT
         private Usuario? _usuarioLogeado;
         private Plantillas? _plantillaSeleccionada;
         private IRepoFutbolista? _repoFutbolista;
+        private IRepoPlantilla? _repoPlantilla;
         private List<TipoJugador> _tiposJugador;
         private List<Futbolistas>? _futbolistasFiltrados;
 
@@ -40,12 +41,13 @@ namespace GRANDT
             // Inicializar el repositorio
             IDbConnection conexion = Conexion.ObtenerConexion();
             _repoFutbolista = new RepoFutbolista(conexion);
+            _repoPlantilla = new RepoPlantilla(conexion);
 
             // Cargar tipos de jugadores
             CargarTiposJugadores();
 
-            // Si hay una plantilla seleccionada, cargar futbolistas del equipo
-            if (_plantillaSeleccionada != null && TipoComboBox.Items.Count > 0)
+            // Si hay una plantilla seleccionada o no, cargar futbolistas (mostramos todos)
+            if (TipoComboBox.Items.Count > 0)
             {
                 TipoComboBox.SelectedIndex = 0;
                 ActualizarFutbolistas();
@@ -72,7 +74,7 @@ namespace GRANDT
 
         private void ActualizarFutbolistas()
         {
-            if (_plantillaSeleccionada == null || _repoFutbolista == null)
+            if (_repoFutbolista == null)
             {
                 return;
             }
@@ -85,9 +87,9 @@ namespace GRANDT
             try
             {
                 TipoJugador tipoSeleccionado = _tiposJugador[TipoComboBox.SelectedIndex];
-                uint idEquipo = _plantillaSeleccionada.idEquipo;
+                uint idEquipo = 0; // 0 => todos los equipos
 
-                // Obtener futbolistas por tipo y equipo
+                // Obtener futbolistas por tipo y equipo (0 para todos los equipos)
                 _futbolistasFiltrados = _repoFutbolista.TraerFutbolistasBasicoXTipoXEquipo(
                     tipoSeleccionado.idTipoJugador,
                     idEquipo
@@ -132,6 +134,10 @@ namespace GRANDT
                 FechaNacimiento = f.FechadeNacimiento.ToString("yyyy-MM-dd"),
                 Cotizacion = f.Cotizacion
             }).ToList();
+
+            // Allow selecting multiple rows so user can fichar varios jugadores a la vez
+            FutbolistasDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            FutbolistasDataGridView.MultiSelect = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -156,6 +162,102 @@ namespace GRANDT
             edicionPlantilla edicionPlantilla = new edicionPlantilla(_plantillaSeleccionada);
             edicionPlantilla.Show();
             this.Hide();
+        }
+
+        private void Fichar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_repoPlantilla == null)
+                {
+                    MessageBox.Show("Error: repositorio de plantillas no inicializado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (_plantillaSeleccionada == null)
+                {
+                    MessageBox.Show("Seleccione primero una plantilla válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var selectedRows = FutbolistasDataGridView.SelectedRows.Cast<DataGridViewRow>().ToList();
+                if (selectedRows == null || selectedRows.Count == 0)
+                {
+                    MessageBox.Show("Seleccione uno o más jugadores para fichar", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                decimal presupuesto = (decimal)(_plantillaSeleccionada.Presupuesto);
+                decimal gastoActual = 0m;
+                if (_plantillaSeleccionada.JugadoresEnPlantilla != null)
+                {
+                    gastoActual = _plantillaSeleccionada.JugadoresEnPlantilla.Sum(j => j.Cotizacion);
+                }
+
+                int signedCount = 0;
+                var failedDueBudget = new List<string>();
+                var alreadyInPlantilla = new List<string>();
+
+                foreach (var row in selectedRows)
+                {
+                    int idFutbolista = 0;
+                    var boundItem = row.DataBoundItem;
+                    if (boundItem != null)
+                    {
+                        dynamic d = boundItem;
+                        idFutbolista = (int)d.idFutbolista;
+                    }
+                    else
+                    {
+                        idFutbolista = Convert.ToInt32(row.Cells[0].Value);
+                    }
+
+                    var jugadorObj = _futbolistasFiltrados?.FirstOrDefault(f => f.idFutbolista == idFutbolista);
+                    if (jugadorObj == null)
+                    {
+                        // intentar continuar con el siguiente
+                        continue;
+                    }
+
+                    string nombre = $"{jugadorObj.Nombre} {jugadorObj.Apellido}";
+
+                    // comprobar si ya está en la plantilla
+                    if (_plantillaSeleccionada.JugadoresEnPlantilla != null && _plantillaSeleccionada.JugadoresEnPlantilla.Any(f => f.idFutbolista == idFutbolista))
+                    {
+                        alreadyInPlantilla.Add(nombre);
+                        continue;
+                    }
+
+                    // comprobar presupuesto
+                    if (gastoActual + jugadorObj.Cotizacion > presupuesto)
+                    {
+                        failedDueBudget.Add(nombre);
+                        continue;
+                    }
+
+                    // Dar de alta jugador en la plantilla (no titular por defecto)
+                    _repoPlantilla.AltaJugadorEnPlantilla(idFutbolista, _plantillaSeleccionada.idPlantilla, false);
+
+                    // Actualizar la colección local de jugadores en la plantilla
+                    var lista = _plantillaSeleccionada.JugadoresEnPlantilla?.ToList() ?? new List<Futbolistas>();
+                    lista.Add(jugadorObj);
+                    _plantillaSeleccionada.JugadoresEnPlantilla = lista;
+
+                    gastoActual += jugadorObj.Cotizacion;
+                    signedCount++;
+                }
+
+                var mensajes = new List<string>();
+                if (signedCount > 0) mensajes.Add($"Jugadores fichados: {signedCount}");
+                if (alreadyInPlantilla.Count > 0) mensajes.Add($"Ya estaban en la plantilla: {string.Join(", ", alreadyInPlantilla)}");
+                if (failedDueBudget.Count > 0) mensajes.Add($"No se ficharon por presupuesto: {string.Join(", ", failedDueBudget)}");
+
+                MessageBox.Show(string.Join("\n", mensajes), "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al fichar jugador(es): {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

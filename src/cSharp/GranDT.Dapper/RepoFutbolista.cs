@@ -41,6 +41,24 @@ public class RepoFutbolista : Repo, IRepoFutbolista//
 
     public IEnumerable<Futbolistas> TraerFutbolistasBasicoXTipoXEquipo(uint idTipoJugador, uint idEquipo)
     {
+        // Si idEquipo == 0 interpretamos que queremos todos los equipos: hacer consulta directa ignorando el filtro de equipo
+        if (idEquipo == 0)
+        {
+            const string sql = @"
+                SELECT idFutbolista,
+                       idEquipo,
+                       idTipoJugador,
+                       Nombre,
+                       Apellido,
+                       Apodo,
+                       FechadeNacimiento,
+                       Cotizacion
+                FROM Futbolistas
+                WHERE idTipoJugador = @IdTipoJugador";
+
+            return _conexion.Query<Futbolistas>(sql, new { IdTipoJugador = idTipoJugador }).ToList();
+        }
+
         var p = new DynamicParameters();
         p.Add("UnIdTipoJugador", idTipoJugador);
         p.Add("UnIdEquipo", idEquipo);

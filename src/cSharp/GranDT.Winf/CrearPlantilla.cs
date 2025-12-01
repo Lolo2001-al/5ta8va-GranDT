@@ -33,7 +33,7 @@ namespace GRANDT
             IDbConnection conexion = Conexion.ObtenerConexion();
             _repoPlantilla = new RepoPlantilla(conexion);
             
-            // Cargar equipos en el ComboBox
+            // Cargar equipos en el ComboBox (pero dejar selección fija)
             CargarEquipos();
         }
 
@@ -53,6 +53,16 @@ namespace GRANDT
                 EquipoBox.Items.Add("Equipo 2");
                 EquipoBox.Items.Add("Equipo 3");
                 EquipoBox.SelectedIndex = 0;
+
+                // No permitir que el usuario cambie el equipo: siempre será Equipo 1
+                EquipoBox.Enabled = false;
+
+                // Actualizar la etiqueta para dejar claro que el equipo es fijo
+                try
+                {
+                    label3.Text = "Equipo: 1"; // label3 viene del diseñador
+                }
+                catch { /* Si no existe label3 por alguna razón, ignorar */ }
             }
             catch (Exception ex)
             {
@@ -82,12 +92,6 @@ namespace GRANDT
                 return;
             }
 
-            if (EquipoBox.SelectedIndex < 0)
-            {
-                MessageBox.Show("Por favor, selecciona un equipo", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             try
             {
                 if (_usuarioLogeado == null)
@@ -101,7 +105,7 @@ namespace GRANDT
                 {
                     Nombre = NombreBox.Text.Trim(),
                     idUsuario = (int)_usuarioLogeado.IdUsuario,
-                    idEquipo = (uint)(EquipoBox.SelectedIndex + 1), // Usar índice como ID por ahora
+                    idEquipo = 1, // Siempre asignar idEquipo = 1
                     Presupuesto = 65000000, // Presupuesto fijo por ahora
                     MaxJugadores = 11 // Máximo de jugadores por defecto
                 };

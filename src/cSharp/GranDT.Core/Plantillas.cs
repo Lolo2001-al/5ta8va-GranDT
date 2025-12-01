@@ -12,5 +12,5 @@ public class Plantillas
 
     public Usuario? Usuario { get; set; }
     public Equipo? Equipo { get; set; }
-    public IEnumerable<Futbolistas> JugadoresEnPlantilla { get; set; } = [];
+    public IEnumerable<Futbolistas> JugadoresEnPlantilla { get; set; } = new List<Futbolistas>();
 }
