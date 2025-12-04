@@ -95,17 +95,7 @@ namespace GRANDT
                     idEquipo
                 ).ToList();
 
-                // Actualizar el ComboBox de futbolistas
-                Futbolista.Items.Clear();
-                foreach (var futbolista in _futbolistasFiltrados)
-                {
-                    string nombreCompleto = $"{futbolista.Nombre} {futbolista.Apellido}";
-                    if (!string.IsNullOrEmpty(futbolista.Apodo))
-                    {
-                        nombreCompleto += $" ({futbolista.Apodo})";
-                    }
-                    Futbolista.Items.Add(nombreCompleto);
-                }
+
 
                 // Actualizar el DataGridView
                 ActualizarDataGridView();
@@ -132,7 +122,8 @@ namespace GRANDT
                 Apellido = f.Apellido,
                 Apodo = f.Apodo ?? "",
                 FechaNacimiento = f.FechadeNacimiento.ToString("yyyy-MM-dd"),
-                Cotizacion = f.Cotizacion
+                Cotizacion = f.Cotizacion,
+                Nota = f.Nota,
             }).ToList();
 
             // Allow selecting multiple rows so user can fichar varios jugadores a la vez
@@ -258,6 +249,11 @@ namespace GRANDT
             {
                 MessageBox.Show($"Error al fichar jugador(es): {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void FutbolistasDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

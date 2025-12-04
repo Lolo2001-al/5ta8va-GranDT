@@ -12,6 +12,8 @@ public class Futbolistas
     public DateTime FechadeNacimiento { get; set; } = DateTime.MinValue;
     public decimal Cotizacion { get; set; }= decimal.Zero;
 
+    public int Nota { get; set; }
+
     public Equipo? Equipo { get; set; } 
     public TipoJugador? TipoJugador { get; set; }
     public IEnumerable<Puntuacion> Puntuaciones { get; set; } = [];

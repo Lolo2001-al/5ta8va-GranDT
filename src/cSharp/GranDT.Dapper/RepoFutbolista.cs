@@ -41,22 +41,37 @@ public class RepoFutbolista : Repo, IRepoFutbolista//
 
     public IEnumerable<Futbolistas> TraerFutbolistasBasicoXTipoXEquipo(uint idTipoJugador, uint idEquipo)
     {
-        // Si idEquipo == 0 interpretamos que queremos todos los equipos: hacer consulta directa ignorando el filtro de equipo
         if (idEquipo == 0)
         {
             const string sql = @"
-                SELECT idFutbolista,
-                       idEquipo,
-                       idTipoJugador,
-                       Nombre,
-                       Apellido,
-                       Apodo,
-                       FechadeNacimiento,
-                       Cotizacion
-                FROM Futbolistas
-                WHERE idTipoJugador = @IdTipoJugador";
+            SELECT 
+                f.idFutbolista,
+                f.idEquipo,
+                f.idTipoJugador,
+                f.Nombre,
+                f.Apellido,
+                f.Apodo,
+                f.FechadeNacimiento,
+                f.Cotizacion,
+                pu.Nota
+            FROM Futbolistas f
+            LEFT JOIN (
+                SELECT p1.idFutbolista, p1.Nota
+                FROM Puntuacion p1
+                INNER JOIN (
+                    SELECT idFutbolista, MAX(FechaPartido) AS UltFecha
+                    FROM Puntuacion
+                    GROUP BY idFutbolista
+                ) p2 ON p1.idFutbolista = p2.idFutbolista
+                AND p1.FechaPartido = p2.UltFecha
+            ) pu ON f.idFutbolista = pu.idFutbolista
+            WHERE f.idTipoJugador = @UnIdTipoJugador;
+        ";
 
-            return _conexion.Query<Futbolistas>(sql, new { IdTipoJugador = idTipoJugador }).ToList();
+            return _conexion.Query<Futbolistas>(
+                sql,
+                new { UnIdTipoJugador = idTipoJugador }
+            ).ToList();
         }
 
         var p = new DynamicParameters();
@@ -69,6 +84,7 @@ public class RepoFutbolista : Repo, IRepoFutbolista//
             commandType: CommandType.StoredProcedure
         ).ToList();
     }
+
 
     // --- Operaciones de Tipo de Jugador (Posición) ---
 

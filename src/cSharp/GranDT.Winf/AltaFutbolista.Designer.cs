@@ -34,11 +34,6 @@
             FutbolistasDataGridView = new DataGridView();
             TipoComboBox = new ComboBox();
             button1 = new Button();
-            label2 = new Label();
-            label1 = new Label();
-            NombreF = new Label();
-            Atualizar = new Button();
-            Futbolista = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)FutbolistasDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -47,7 +42,7 @@
             Fichar.BackColor = Color.Transparent;
             Fichar.BackgroundImageLayout = ImageLayout.None;
             Fichar.FlatStyle = FlatStyle.Popup;
-            Fichar.Location = new Point(66, 362);
+            Fichar.Location = new Point(334, 393);
             Fichar.Name = "Fichar";
             Fichar.Size = new Size(133, 26);
             Fichar.TabIndex = 0;
@@ -59,7 +54,7 @@
             button2.BackColor = Color.Transparent;
             button2.BackgroundImageLayout = ImageLayout.None;
             button2.FlatStyle = FlatStyle.Popup;
-            button2.Location = new Point(-5, 413);
+            button2.Location = new Point(-5, 427);
             button2.Name = "button2";
             button2.Size = new Size(178, 25);
             button2.TabIndex = 1;
@@ -69,15 +64,15 @@
             // FutbolistasDataGridView
             // 
             FutbolistasDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            FutbolistasDataGridView.Location = new Point(295, 20);
+            FutbolistasDataGridView.Location = new Point(12, 69);
             FutbolistasDataGridView.Name = "FutbolistasDataGridView";
-            FutbolistasDataGridView.Size = new Size(466, 386);
+            FutbolistasDataGridView.Size = new Size(776, 318);
             FutbolistasDataGridView.TabIndex = 2;
             // 
             // TipoComboBox
             // 
             TipoComboBox.FormattingEnabled = true;
-            TipoComboBox.Location = new Point(92, 59);
+            TipoComboBox.Location = new Point(92, 40);
             TipoComboBox.Name = "TipoComboBox";
             TipoComboBox.Size = new Size(81, 23);
             TipoComboBox.TabIndex = 7;
@@ -88,57 +83,12 @@
             button1.BackColor = Color.Transparent;
             button1.BackgroundImageLayout = ImageLayout.None;
             button1.FlatStyle = FlatStyle.Popup;
-            button1.Location = new Point(625, 413);
+            button1.Location = new Point(626, 427);
             button1.Name = "button1";
             button1.Size = new Size(178, 25);
             button1.TabIndex = 10;
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(92, 266);
-            label2.Name = "label2";
-            label2.Size = new Size(14, 15);
-            label2.TabIndex = 6;
-            label2.Text = "X";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(92, 237);
-            label1.Name = "label1";
-            label1.Size = new Size(14, 15);
-            label1.TabIndex = 5;
-            label1.Text = "X";
-            // 
-            // NombreF
-            // 
-            NombreF.AutoSize = true;
-            NombreF.Location = new Point(108, 212);
-            NombreF.Name = "NombreF";
-            NombreF.Size = new Size(14, 15);
-            NombreF.TabIndex = 4;
-            NombreF.Text = "X";
-            // 
-            // Atualizar
-            // 
-            Atualizar.Location = new Point(98, 103);
-            Atualizar.Name = "Atualizar";
-            Atualizar.Size = new Size(75, 23);
-            Atualizar.TabIndex = 8;
-            Atualizar.Text = "Actualizar";
-            Atualizar.UseVisualStyleBackColor = true;
-            Atualizar.Click += Atualizar_Click;
-            // 
-            // Futbolista
-            // 
-            Futbolista.FormattingEnabled = true;
-            Futbolista.Location = new Point(98, 174);
-            Futbolista.Name = "Futbolista";
-            Futbolista.Size = new Size(81, 23);
-            Futbolista.TabIndex = 9;
             // 
             // AltaFutbolista
             // 
@@ -148,12 +98,7 @@
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(button1);
-            Controls.Add(Futbolista);
-            Controls.Add(Atualizar);
             Controls.Add(TipoComboBox);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(NombreF);
             Controls.Add(FutbolistasDataGridView);
             Controls.Add(button2);
             Controls.Add(Fichar);
@@ -163,7 +108,6 @@
             Load += Form4_Load;
             ((System.ComponentModel.ISupportInitialize)FutbolistasDataGridView).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -173,10 +117,5 @@
         private DataGridView FutbolistasDataGridView;
         private ComboBox TipoComboBox;
         private Button button1;
-        private Label label2;
-        private Label label1;
-        private Label NombreF;
-        private Button Atualizar;
-        private ComboBox Futbolista;
     }
 }
