@@ -10,10 +10,12 @@ namespace GRANDT
     public static class DataGlobals
     {
         public static Usuario UsuarioLogueado { get; private set; }
+        public static int IdUsuarioLogueado { get; private set; }
 
         public static void SetUsuario(Usuario u)
         {
             UsuarioLogueado = u;
+            IdUsuarioLogueado = (int)u.IdUsuario;
         }
 
         public static bool EstaLogueado()
@@ -24,6 +26,7 @@ namespace GRANDT
         public static void CerrarSesion()
         {
             UsuarioLogueado = null;
+            IdUsuarioLogueado = 0;
         }
     }
 
