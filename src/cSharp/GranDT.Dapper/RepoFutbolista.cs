@@ -131,4 +131,16 @@ public class RepoFutbolista : Repo, IRepoFutbolista//
         _conexion.Execute(spAltaPuntuacion, p, commandType: CommandType.StoredProcedure);
         return p.Get<int>("AIidpuntuacion");
     }
+
+    // Agregado: actualizar nombre y apodo de futbolista
+    public void ActualizarFutbolista(int idFutbolista, string nombre, string? apodo)
+    {
+        const string sql = @"
+            UPDATE Futbolistas
+            SET Nombre = @Nombre, Apodo = @Apodo
+            WHERE idFutbolista = @IdFutbolista;
+        ";
+
+        _conexion.Execute(sql, new { IdFutbolista = idFutbolista, Nombre = nombre, Apodo = apodo });
+    }
 }

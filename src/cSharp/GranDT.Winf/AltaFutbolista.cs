@@ -142,6 +142,13 @@ public partial class AltaFutbolista : Form
 
     private void button1_Click(object sender, EventArgs e)
     {
+        // Evitar crear edicionPlantilla cuando no hay plantilla seleccionada
+        if (_plantillaSeleccionada == null)
+        {
+            MessageBox.Show("Seleccione primero una plantilla válida antes de editarla.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
         edicionPlantilla edicionPlantilla = new edicionPlantilla(_plantillaSeleccionada);
         edicionPlantilla.Show();
         this.Hide();

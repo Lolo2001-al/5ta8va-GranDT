@@ -13,6 +13,7 @@ public class RepoPlantilla : Repo, IRepoPlantilla
     // Nombres de Stored Procedures
     private static readonly string spAltaPlantilla = "altaPlantilla";
     private static readonly string spPlantillasPorIdUsuario = "PlantillasPorIdUsuario";
+        private static readonly string spPlantillasPorIdUsuarioJ = "PlantillasPorIdUsuarioJ";
     private static readonly string spPlantillasPorEmail = "PlantillasPorEmail";    
     private static readonly string spAltaPlantillaTitular = "altaPlantillaTitular";
     private static readonly string spActualizarPlantillaTitular = "actualizarPlantillaTitular";
@@ -49,6 +50,41 @@ public class RepoPlantilla : Repo, IRepoPlantilla
             commandType: CommandType.StoredProcedure
         ).ToList();
     }
+        public IEnumerable<Plantillas> TraerPlantillasPorIdUsuarioJ(int idPlantilla)
+    {
+        var p = new DynamicParameters();
+        p.Add("UnidPlantilla", idPlantilla);
+
+        // Llamamos al SP dos veces: una para mapear a Plantillas (devuelve filas repetidas por cada futbolista)
+        // y otra para mapear sólo a Futbolistas. Luego asignamos la lista de futbolistas a la plantilla.
+        var plantillas = _conexion.Query<Plantillas>(
+            spPlantillasPorIdUsuarioJ,
+            p,
+            commandType: CommandType.StoredProcedure
+        ).ToList();
+
+        // Obtener futbolistas resultantes del mismo SP (Dapper ignorará columnas adicionales)
+        var futbolistas = _conexion.Query<Futbolistas>(
+            spPlantillasPorIdUsuarioJ,
+            p,
+            commandType: CommandType.StoredProcedure
+        ).ToList();
+
+        // Agrupar y devolver plantillas únicas; como la consulta se filtra por idPlantilla
+        // normalmente habrá una sola plantilla en la lista.
+        var resultado = plantillas
+            .GroupBy(pl => pl.idPlantilla)
+            .Select(g =>
+            {
+                var pl = g.First();
+                pl.JugadoresEnPlantilla = futbolistas;
+                return pl;
+            })
+            .ToList();
+
+        return resultado;
+    }
+
     public IEnumerable<Plantillas> TraerPlantillasPorEmail(string email)
     {
         var p = new DynamicParameters();

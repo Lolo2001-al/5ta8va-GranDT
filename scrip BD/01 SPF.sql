@@ -120,6 +120,15 @@ BEGIN
     WHERE idUsuario = UnidUsuario;
 END;
 //
+CREATE PROCEDURE PlantillasPorIdUsuarioJ(
+    IN UnidPlantilla INT
+)
+BEGIN
+    SELECT *
+    FROM PlantillaFutbolista p
+    WHERE idPlantilla = UnidPlantilla;
+END;
+//
 CREATE PROCEDURE traerEquipo() 
 BEGIN
     SELECT  *

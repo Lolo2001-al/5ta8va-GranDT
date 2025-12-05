@@ -9,4 +9,5 @@ namespace GranDT.Core.Repos;
         int AltaEquipo(string Nombre);
         IEnumerable<Equipo> TraerEquipo();
         int AltaPuntuacion(Puntuacion puntuacion, int idFutbolista);
+        void ActualizarFutbolista(int idFutbolista, string nombre, string? apodo);
     }
