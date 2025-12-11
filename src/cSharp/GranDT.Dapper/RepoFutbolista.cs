@@ -22,7 +22,7 @@ public class RepoFutbolista : Repo, IRepoFutbolista//
     {
         var p = new DynamicParameters();
         
-        // Parámetros de entrada (IN)
+        // Parámetros de entrada (IN)   
         p.Add("UnNombre", futbolistas.Nombre);
         p.Add("UnApellido", futbolistas.Apellido);
         p.Add("UnApodo", futbolistas.Apodo);
@@ -34,9 +34,9 @@ public class RepoFutbolista : Repo, IRepoFutbolista//
         // Parámetro de salida (OUT)
         p.Add("AIidFutbolista", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-        _conexion.Execute(spAltaFutbolista, p, commandType: CommandType.StoredProcedure);
+        _conexion.Execute(spAltaFutbolista, p, commandType: CommandType.StoredProcedure); //ejecuta la llamada al SP
 
-        return p.Get<int>("AIidFutbolista");
+        return p.Get<int>("AIidFutbolista");//devuelve un nuevo ID
     }
 
     public IEnumerable<Futbolistas> TraerFutbolistasBasicoXTipoXEquipo(uint idTipoJugador, uint idEquipo)
